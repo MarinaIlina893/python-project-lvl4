@@ -3,13 +3,21 @@ name = "hexlet-code"
 version = "0.1.0"
 description = ""
 authors = ["MarinaIlina893 <marinailina893@gmail.com>"]
+packages = [
+  { include = "task_manager" },
+]
+
 
 [tool.poetry.dependencies]
 python = "^3.9"
-Django = "^3.2.9"
-gunicorn = "^20.1.0"
-python-dotenv = "^0.19.2"
-dj-database-url = "^0.5.0"
+Django = "3.2.9;"
+gunicorn = "20.1.0;"
+python-dotenv = "0.19.2;"
+dj-database-url = "0.5.0"
+asgiref = "3.4.1;"
+python_version = "^0.0.2"
+pytz = "2021.3;"
+sqlparse = "0.4.2;"
 
 [tool.poetry.dev-dependencies]
 gunicorn = "^20.1.0"
