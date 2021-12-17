@@ -1,0 +1,27 @@
+{% extends 'task_manager/base.html' %}
+{% load i18n %}
+{% load widget_tweaks %}
+{% block content %}
+<h1>{% trans "Statuses" %}</h1>
+<p><a href="{% url 'status/create' %}"> {% trans "Create status" %} </a></p>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th scope="col">ID</th>
+      <th scope="col">Имя</th>
+      <th scope="col">Дата создания</th>
+      <th scope="col"></th>
+    </tr>
+  </thead>
+    <tbody>
+    {% for status in object_list %}
+    <tr>
+      <td>{{ status.id }}</td>
+      <td>{{ status.Name }}</td>
+      <td>{{ status.created_at }}</td>
+      <td><a href="{% url 'status/update' status.id %}">Изменить </a><a href="{% url 'status/delete' status.id %}">Удалить</a></td>
+    </tr>
+{% endfor %}
+    </tbody>
+</table>
+{% endblock %}

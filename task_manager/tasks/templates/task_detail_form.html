@@ -1,0 +1,23 @@
+{% extends 'task_manager/base.html' %}
+{% load i18n %}
+{% load widget_tweaks %}
+{% block content %}
+
+{% csrf_token %}
+<h1>{% trans "Просмотр задачи" %}</h1>
+
+<p>{{ task.name }}<p>
+<p>{% trans "Автор" %} {{ task.author.first_name|add:" "|add:task.author.last_name}}</p>
+<p>{% trans "Исполнитель" %} {{ task.executor.first_name|add:" "|add:task.executor.last_name}}</p>
+<p>{% trans "Статус" %} {{ task.status.Name}}</p>
+<p>{% trans "Дата создания" %} {{ task.created_at}}</p>
+    {% if task.labels.all %}
+        <p>{% trans "Метки" %}
+            {% for label in task.labels.all %}
+                {{ label.name }}
+            {% endfor %}</p>
+    {% endif %}
+<p><a href="{% url 'task/update' task.id %}">Изменить</a></p>
+<p><a href="{% url 'task/delete' task.id %}">Удалить</a></p>
+
+{% endblock %}

@@ -1,0 +1,18 @@
+{% extends 'task_manager/base.html' %}
+{% load i18n %}
+{% load widget_tweaks %}
+{% block content %}
+<h1>Регистрация</h1>
+<form method="post">{% csrf_token %}
+    {% for field in form %}
+    <div class="m-4 form-group">
+        <label> {{ field.label }}</label>
+        {% render_field field type="text" class="form-control">%}
+        {% if field.help_text %}
+        <small class="form-text text-muted">{{ field.help_text }}</small>
+      {% endif %}
+    </div>
+    {% endfor %}
+    <button type="submit" class="m-4 btn btn-primary">{% trans "Submit" %}</button>
+</form>
+{% endblock %}

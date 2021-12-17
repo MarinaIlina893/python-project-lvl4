@@ -16,10 +16,22 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from task_manager import views
+from django.contrib.auth import views as auth_views
+
 
 urlpatterns = [
-    path('', views.index, ),
-    path('/', views.index, include('django.contrib.auth.urls')),
+    path('', views.index),
     path('users/', include('task_manager.users.urls')),
-    #path('admin/', admin.site.urls),
+    path('admin/', admin.site.urls),
+    path('login/',
+         views.UserLoginView.as_view(
+             template_name='task_manager/login.html',
+         ),
+         name='login'),
+    path('logout/',
+         auth_views.LogoutView.as_view(),
+         name='logout'),
+    path('statuses/', include('task_manager.statuses.urls')),
+    path('tasks/', include('task_manager.tasks.urls')),
+    path('labels/', include('task_manager.labels.urls')),
 ]

@@ -1,0 +1,28 @@
+{% extends 'task_manager/base.html' %}
+{% load i18n %}
+{% load widget_tweaks %}
+{% block content %}
+<h1>{% trans "Метки" %}</h1>
+<p><a href="{% url 'label/create' %}">{% trans "Создать метку" %} </a></p>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th scope="col">{% trans "ID" %}</th>
+      <th scope="col">{% trans "Имя" %}</th>
+      <th scope="col">{% trans "Дата создания" %}</th>
+      <th scope="col"></th>
+    </tr>
+  </thead>
+    <tbody>
+    {% for label in object_list %}
+    <tr>
+      <td>{{ label.id }}</td>
+      <td>{{ label.name }}</td>
+      <td>{{ label.created_at }}</td>
+      <td><a href="{% url 'label/update' label.id %}">{% trans "Изменить" %}</a></td>
+      <td><a href="{% url 'label/delete' label.id %}">{% trans "Удалить" %}</a></td>
+    </tr>
+{% endfor %}
+    </tbody>
+</table>
+{% endblock %}

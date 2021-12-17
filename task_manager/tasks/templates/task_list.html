@@ -1,0 +1,37 @@
+{% extends 'task_manager/base.html' %}
+{% load i18n %}
+{% load widget_tweaks %}
+{% block content %}
+<h1>{% trans "Tasks" %}</h1>
+<p><a href="{% url 'task/create' %}"> {% trans "Create task" %} </a></p>
+<form method="get">
+        {{ filter.form.as_p }}
+        <input type="submit" />
+    </form>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th scope="col">ID</th>
+      <th scope="col">Имя</th>
+      <th scope="col">Статус</th>
+      <th scope="col">Автор</th>
+      <th scope="col">Исполнитель</th>
+      <th scope="col">Дата создания</th>
+      <th scope="col"></th>
+    </tr>
+  </thead>
+    <tbody>
+    {% for task in object_list %}
+    <tr>
+      <td><a href="{% url 'task/detail' task.id %}">{{ task.id }}</a></td>
+      <td>{{ task.name }}</td>
+      <td>{{ task.status.Name }}</td>
+      <td>{{ task.author }}</td>
+      <td>{{ task.executor }}</td>
+      <td>{{ task.created_at }}</td>
+      <td><a href="{% url 'task/update' task.id %}">Изменить </a><a href="{% url 'task/delete' task.id %}">Удалить</a></td>
+    </tr>
+{% endfor %}
+    </tbody>
+</table>
+{% endblock %}

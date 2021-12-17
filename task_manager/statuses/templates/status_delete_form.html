@@ -1,0 +1,11 @@
+{% extends 'task_manager/base.html' %}
+{% load i18n %}
+{% load widget_tweaks %}
+{% block content %}
+<h1>{% trans "Status delete" %}</h1>
+<form method="post">{% csrf_token %}
+<h2>{% trans "Are you sure you want to delete " %}{{ status.Name }}?</h2>
+    <button type="submit" class="m-4 btn btn-primary">{% trans "Delete" %}</button>
+
+</form>
+{% endblock %}
