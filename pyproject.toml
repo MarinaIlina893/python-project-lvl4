@@ -22,7 +22,7 @@ django-bootstrap4 = "^21.1"
 django-crispy-forms = "^1.13.0"
 django-widget-tweaks = "^1.4.9"
 django-filter = "^21.1"
-flake8 = "^4.0.1"
+flake8 = "^3.8.4"
 
 [tool.poetry.dev-dependencies]
 gunicorn = "^20.1.0"
