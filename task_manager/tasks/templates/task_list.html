@@ -13,6 +13,7 @@
     <tr>
       <th scope="col">ID</th>
       <th scope="col">Имя</th>
+      <th scope="col">Описание</th>
       <th scope="col">Статус</th>
       <th scope="col">Автор</th>
       <th scope="col">Исполнитель</th>
@@ -27,8 +28,8 @@
       <td><a href="{% url 'task/detail' task.id %}">{{ task.name }}</a></td>
       <td>{{ task.description }}</td>
       <td>{{ task.status.name }}</td>
-      <td>{{ task.author }}</td>
-      <td>{{ task.executor }}</td>
+      <td>{{ task.author.first_name|add:" "|add:task.author.last_name}}</td>
+      <td>{{ task.executor.first_name|add:" "|add:task.executor.last_name}}</td>
       <td>{{ task.created_at }}</td>
       <td><a href="{% url 'task/update' task.id %}">Изменить</a><a href="{% url 'task/delete' task.id %}">Удалить</a></td>
     </tr>
