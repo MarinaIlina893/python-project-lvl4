@@ -2,7 +2,6 @@ from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django import forms
 from .models import Task
 from task_manager.statuses.models import Status
-from django.contrib.auth.models import User
 from task_manager.labels.models import Label
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http import HttpResponseRedirect
@@ -14,6 +13,8 @@ from django.views.generic import DetailView
 import django_filters
 from django_filters.views import FilterView
 from task_manager.utils import MessageMixin
+from task_manager.users.models import User
+from django.forms.widgets import Select
 from django.db.models.functions import Concat
 from django.db.models import F, Value
 
@@ -24,15 +25,11 @@ class CreateTaskForm(forms.ModelForm):
         fields = ['name', 'description', 'status', 'executor', 'labels']
         labels = {
             'name': _('Имя'),
-            'description': _("Описание"),
-            'status': _("Статус"),
-            'labels': _("Метки"),
+            'description': _('Описание'),
+            'status': _('Статус'),
+            'executor': _('Исполнитель'),
+            'labels': _('Метки'),
         }
-
-    executor = forms.ModelChoiceField(
-        queryset=User.objects.values_list(Concat('first_name', Value(' ') , 'last_name'), flat=True),
-            #.annotate(Concat(('first_name'), Value(' '), ('last_name'))),
-        label=_("Исполнитель"))
 
 class TaskCreate(LoginRequiredMixin, MessageMixin, CreateView):
     model = Task
@@ -40,6 +37,11 @@ class TaskCreate(LoginRequiredMixin, MessageMixin, CreateView):
     success_url = '/tasks/'
     template_name = 'task_create_form.html'
     success_message = "Задача успешно создана"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['executors'] = User.objects.all()
+        return context
 
     def form_valid(self, form):
         obj = form.save(commit=False)
