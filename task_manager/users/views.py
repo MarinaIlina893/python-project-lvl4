@@ -78,7 +78,7 @@ class UserUpdate(MessageMixin, UpdateView):
 
 class UserDelete(DeleteView):
     model = User
-    success_url = '/login'
+    success_url = '/users/'
 
 
 class UserListView(ListView):
