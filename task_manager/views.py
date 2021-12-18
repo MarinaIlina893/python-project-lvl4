@@ -4,6 +4,7 @@ from django.contrib.auth import views as auth_views
 from task_manager.utils import MessageMixin
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.models import User
+from django.contrib import messages
 
 
 def index(request):
@@ -26,3 +27,14 @@ class UserLoginView(MessageMixin, auth_views.LoginView):
     success_message = _("Вы залогинены")
     error_message = _("Something went wrong")
     success_url = '/'
+
+
+class UserLogoutView(auth_views.LogoutView):
+
+    def get_next_page(self):
+        next_page = super().get_next_page()
+        messages.add_message(
+            self.request, messages.SUCCESS,
+            'Вы разлогинены'
+        )
+        return next_page
