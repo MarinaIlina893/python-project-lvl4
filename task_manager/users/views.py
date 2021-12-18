@@ -17,6 +17,7 @@ class CreateUserForm(UserCreationForm):
 
 
 class UpdateUserForm(forms.ModelForm):
+
     password1 = forms.CharField(
         label=_("Пароль"),
         widget=forms.PasswordInput(attrs={'autocomplete': 'new-password'}),
@@ -34,15 +35,15 @@ class UpdateUserForm(forms.ModelForm):
         fields = ('first_name', 'last_name', 'username', 'password1', 'password2')
 
     def clean_password2(self):
-        password1 = self.cleaned_data.get('password1')
-        password2 = self.cleaned_data.get('password2')
-        if password1 and password2 and password1 != password2:
+        new_password1 = self.cleaned_data.get('password1')
+        new_password2 = self.cleaned_data.get('password2')
+        if new_password1 and new_password2 and new_password1 != new_password2:
             raise ValidationError(
                 self.error_messages['password_mismatch'],
                 code='password_mismatch',
             )
-        password_validation.validate_password(password2, self.user)
-        return password2
+        password_validation.validate_password(new_password2)
+        return new_password2
 
     def save(self, commit=True):
         # Save the provided password in hashed format
