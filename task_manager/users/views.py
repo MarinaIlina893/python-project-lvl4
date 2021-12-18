@@ -64,6 +64,7 @@ class UserCreate(MessageMixin, CreateView):
     form_class = CreateUserForm
     success_url = '/login/'
     template_name = 'auth/user_form.html'
+    success_message = "Пользователь успешно зарегистрирован"
 
 
 class UserUpdate(UpdateView):
