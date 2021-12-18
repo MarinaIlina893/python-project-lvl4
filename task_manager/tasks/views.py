@@ -14,9 +14,6 @@ import django_filters
 from django_filters.views import FilterView
 from task_manager.utils import MessageMixin
 from task_manager.users.models import User
-from django.forms.widgets import Select
-from django.db.models.functions import Concat
-from django.db.models import F, Value
 
 
 class CreateTaskForm(forms.ModelForm):
@@ -110,7 +107,7 @@ class TaskDetail(LoginRequiredMixin, DetailView):
     context_object_name = 'task'
 
 
-class TaskFilter(django_filters.FilterSet):
+class TaskFilter(LoginRequiredMixin, django_filters.FilterSet):
 
     status = django_filters.ModelChoiceFilter(field_name='status',
                                               label='Статус',
@@ -127,17 +124,15 @@ class TaskFilter(django_filters.FilterSet):
 
     author = django_filters.BooleanFilter(field_name='author',
                                           label='Только свои задачи',
-                                          method='my_custom_filter',
-                                          widget=forms.CheckboxInput)
+                                          widget=forms.CheckboxInput,
+                                          method='my_custom_filter')
+
 
     class Meta:
         model = Task
-        fields = ['status']
+        fields = ['status', 'executor', 'labels']
 
     def my_custom_filter(self, queryset, name, value):
-        if value:
-            user = getattr(self.request, 'user', None)
-            return Task.objects.filter(author=user)
         return queryset
 
 
@@ -148,6 +143,10 @@ class TaskListView(LoginRequiredMixin, FilterView):
     filterset_class = TaskFilter
 
     def get_queryset(self):
+        if self.request.GET.get('author') == 'on':
+            qs = self.model.objects.filter(author=self.request.user)
+            task_filtered_list = TaskFilter(self.request.GET, queryset=qs)
+            return task_filtered_list.qs
         qs = self.model.objects.all()
         task_filtered_list = TaskFilter(self.request.GET, queryset=qs)
         return task_filtered_list.qs
