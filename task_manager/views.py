@@ -2,7 +2,7 @@ from django.shortcuts import render
 from django.utils.translation import gettext as _
 from django.contrib.auth import views as auth_views
 from task_manager.utils import MessageMixin
-from django import forms
+from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.models import User
 
 
@@ -10,7 +10,7 @@ def index(request):
     return render(request, 'task_manager/base.html')
 
 
-"""class LoginForm(forms.ModelForm):
+class LoginForm(AuthenticationForm):
     class Meta:
         model = User
         fields = ['username', 'password']
@@ -19,7 +19,7 @@ def index(request):
         super().__init__(*args, **kwargs)
 
         for field_name, field in self.fields.items():
-            self.fields['username'].widget.attrs['placeholder'] = field.label"""
+            self.fields['username'].widget.attrs['placeholder'] = field.label
 
 
 class UserLoginView(MessageMixin, auth_views.LoginView):
