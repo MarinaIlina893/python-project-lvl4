@@ -7,6 +7,7 @@ from django.http import HttpResponseRedirect
 from django.contrib import messages
 from django.views.generic.edit import FormMixin
 from django.utils.translation import gettext as _
+from task_manager.utils import MessageMixin
 
 
 # Create your views here.
@@ -18,11 +19,12 @@ class CreateStatusForm(forms.ModelForm):
     name = forms.CharField(label=_("Имя"))
 
 
-class StatusCreate(LoginRequiredMixin, CreateView):
+class StatusCreate(LoginRequiredMixin, MessageMixin, CreateView):
     model = Status
     form_class = CreateStatusForm
     success_url = '/statuses/'
     template_name = 'status_create_form.html'
+    success_message = "Статус успешно создан"
 
 
 class StatusListView(ListView):
@@ -39,11 +41,12 @@ class UpdateStatusForm(forms.ModelForm):
     name = forms.CharField(label=_("Имя"))
 
 
-class StatusUpdate(LoginRequiredMixin, UpdateView):
+class StatusUpdate(LoginRequiredMixin, MessageMixin, UpdateView):
     model = Status
     form_class = UpdateStatusForm
     success_url = '/statuses/'
     template_name = 'status_update_form.html'
+    success_message = "Статус успешно изменён"
 
 
 class DeleteStatusForm(forms.ModelForm):
@@ -57,8 +60,8 @@ class StatusDelete(LoginRequiredMixin, FormMixin, DeleteView):
     form_class = DeleteStatusForm
     success_url = '/statuses/'
     template_name = 'status_delete_form.html'
-    success_message = _("You are logged in")
     error_message = _("Something went wrong")
+    success_message = "Статус успешно удалён"
 
     def form_invalid(self, form):
         response = super().form_invalid(form)
@@ -69,6 +72,7 @@ class StatusDelete(LoginRequiredMixin, FormMixin, DeleteView):
         self.object = self.get_object()
         if not self.object.task_set.all():
             self.object.delete()
+            messages.success(self.request, self.success_message)
             return HttpResponseRedirect(self.get_success_url())
         else:
             return self.form_invalid(self.get_context_data(**kwargs)['form'])
