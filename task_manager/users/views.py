@@ -80,7 +80,7 @@ class UserUpdate(MessageMixin, UpdateView):
 class UserDelete(DeleteView):
     model = User
     success_url = '/users/'
-    success_message = "Пользователь успешно удален"
+    success_message = "Пользователь успешно удалён"
 
     def delete(self, request, *args, **kwargs):
         messages.success(self.request, self.success_message)
