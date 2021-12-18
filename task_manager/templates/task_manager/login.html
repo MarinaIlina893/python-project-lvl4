@@ -11,7 +11,7 @@
       {% endif %}
     </div>
     <div class="m-4 form-group">
-        <label>{{ form.password.label }}</label>
+        <label for={{ form.password.id_for_label }}>{{ form.password.label }}</label>
         {% render_field form.password type="text" class="form-control" placeholder="Пароль">%}
         {% if form.password.help_text %}
         <small class="form-text text-muted">{{ form.password.help_text }}</small>
