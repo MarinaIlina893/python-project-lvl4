@@ -13,7 +13,7 @@ from django.utils.translation import gettext as _
 class CreateStatusForm(forms.ModelForm):
     class Meta:
         model = Status
-        fields = ['Name']
+        fields = ['name']
 
 
 class StatusCreate(LoginRequiredMixin, CreateView):
@@ -32,7 +32,7 @@ class StatusListView(ListView):
 class UpdateStatusForm(forms.ModelForm):
     class Meta:
         model = Status
-        fields = ['Name']
+        fields = ['name']
 
 
 class StatusUpdate(LoginRequiredMixin, UpdateView):
@@ -45,7 +45,7 @@ class StatusUpdate(LoginRequiredMixin, UpdateView):
 class DeleteStatusForm(forms.ModelForm):
     class Meta:
         model = Status
-        fields = ['Name']
+        fields = ['name']
 
 
 class StatusDelete(LoginRequiredMixin, FormMixin, DeleteView):
