@@ -14,6 +14,8 @@ from django.views.generic import DetailView
 import django_filters
 from django_filters.views import FilterView
 from task_manager.utils import MessageMixin
+from django.db.models.functions import Concat
+from django.db.models import F, Value
 
 
 class CreateTaskForm(forms.ModelForm):
@@ -24,16 +26,20 @@ class CreateTaskForm(forms.ModelForm):
             'name': _('Имя'),
             'description': _("Описание"),
             'status': _("Статус"),
-            'executor': _("Исполнитель"),
             'labels': _("Метки"),
         }
 
+    executor = forms.ModelChoiceField(
+        queryset=User.objects.values_list(Concat('first_name', Value(' ') , 'last_name'), flat=True),
+            #.annotate(Concat(('first_name'), Value(' '), ('last_name'))),
+        label=_("Исполнитель"))
 
 class TaskCreate(LoginRequiredMixin, MessageMixin, CreateView):
     model = Task
     form_class = CreateTaskForm
     success_url = '/tasks/'
     template_name = 'task_create_form.html'
+    success_message = "Задача успешно создана"
 
     def form_valid(self, form):
         obj = form.save(commit=False)
