@@ -68,11 +68,12 @@ class UserCreate(MessageMixin, CreateView):
     success_message = "Пользователь успешно зарегистрирован"
 
 
-class UserUpdate(UpdateView):
+class UserUpdate(MessageMixin, UpdateView):
     model = User
     success_url = '/users/'
     template_name = 'auth/user_update.html'
     form_class = UpdateUserForm
+    success_message = "Пользователь успешно изменён"
 
 
 class UserDelete(DeleteView):
