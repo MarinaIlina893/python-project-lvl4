@@ -25,3 +25,4 @@ class LoginForm(AuthenticationForm):
 class UserLoginView(MessageMixin, auth_views.LoginView):
     success_message = _("Вы залогинены")
     error_message = _("Something went wrong")
+    success_url = '/'
