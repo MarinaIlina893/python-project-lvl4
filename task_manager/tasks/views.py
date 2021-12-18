@@ -13,15 +13,23 @@ from django.urls import reverse
 from django.views.generic import DetailView
 import django_filters
 from django_filters.views import FilterView
+from task_manager.utils import MessageMixin
 
 
 class CreateTaskForm(forms.ModelForm):
     class Meta:
         model = Task
         fields = ['name', 'description', 'status', 'executor', 'labels']
+        labels = {
+            'name': _('Имя'),
+            'description': _("Описание"),
+            'status': _("Статус"),
+            'executor': _("Исполнитель"),
+            'labels': _("Метки"),
+        }
 
 
-class TaskCreate(LoginRequiredMixin, CreateView):
+class TaskCreate(LoginRequiredMixin, MessageMixin, CreateView):
     model = Task
     form_class = CreateTaskForm
     success_url = '/tasks/'

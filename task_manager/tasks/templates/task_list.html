@@ -3,7 +3,7 @@
 {% load widget_tweaks %}
 {% block content %}
 <h1>{% trans "Tasks" %}</h1>
-<p><a href="{% url 'task/create' %}"> {% trans "Create task" %} </a></p>
+<p><a href="{% url 'task/create' %}"> {% trans "Создать задачу" %} </a></p>
 <form method="get">
         {{ filter.form.as_p }}
         <input type="submit" />
@@ -29,7 +29,7 @@
       <td>{{ task.author }}</td>
       <td>{{ task.executor }}</td>
       <td>{{ task.created_at }}</td>
-      <td><a href="{% url 'task/update' task.id %}">Изменить </a><a href="{% url 'task/delete' task.id %}">Удалить</a></td>
+      <td><a href="{% url 'task/update' task.id %}">Изменить</a><a href="{% url 'task/delete' task.id %}">Удалить</a></td>
     </tr>
 {% endfor %}
     </tbody>
