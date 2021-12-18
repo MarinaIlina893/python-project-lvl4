@@ -7,6 +7,7 @@ from django.core.exceptions import ValidationError
 from django.utils.translation import gettext_lazy as _
 from django.contrib.auth import password_validation
 from task_manager.utils import MessageMixin
+from django.contrib import messages
 
 
 class CreateUserForm(UserCreationForm):
@@ -76,10 +77,14 @@ class UserUpdate(MessageMixin, UpdateView):
     success_message = "Пользователь успешно изменён"
 
 
-class UserDelete(MessageMixin, DeleteView):
+class UserDelete(DeleteView):
     model = User
     success_url = '/users/'
-    success_message = "Пользователь успешно удалён"
+    success_message = "Пользователь успешно удален"
+
+    def delete(self, request, *args, **kwargs):
+        messages.success(self.request, self.success_message)
+        return super().delete(request, *args, **kwargs)
 
 
 class UserListView(ListView):
