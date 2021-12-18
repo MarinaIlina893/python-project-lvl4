@@ -3,15 +3,20 @@
 {% load widget_tweaks %}
 {% block content %}
 <form method="post">{% csrf_token %}
-    {% for field in form.visible_fields %}
     <div class="m-4 form-group">
-        <label>{{ field.label }}</label>
-        {% render_field field type="text" class="form-control">%}
-        {% if field.help_text %}
-        <small class="form-text text-muted">{{ field.help_text }}</small>
+        <label>{{ form.username.label }}</label>
+        {% render_field form.username type="text" class="form-control" placeholder="Имя пользователя">%}
+        {% if form.username.help_text %}
+        <small class="form-text text-muted">{{ form.username.help_text }}</small>
       {% endif %}
     </div>
-    {% endfor %}
+    <div class="m-4 form-group">
+        <label>{{ form.password.label }}</label>
+        {% render_field form.password type="text" class="form-control" placeholder="Пароль">%}
+        {% if form.password.help_text %}
+        <small class="form-text text-muted">{{ form.password.help_text }}</small>
+      {% endif %}
+    </div>
     <button type="submit" class="m-4 btn btn-primary">{% trans "Войти" %}</button>
 </form>
 {% endblock %}
