@@ -22,6 +22,7 @@ class LabelCreate(LoginRequiredMixin, MessageMixin, CreateView):
     form_class = CreateLabelForm
     success_url = '/labels/'
     template_name = 'label_create_form.html'
+    success_message = "Метка успешно создана"
 
 
 class LabelListView(LoginRequiredMixin, ListView):
@@ -42,6 +43,7 @@ class LabelUpdate(LoginRequiredMixin, MessageMixin, UpdateView):
     form_class = UpdateLabelForm
     success_url = '/labels/'
     template_name = 'label_update_form.html'
+    success_message = "Метка успешно изменена"
 
 
 class DeleteLabelForm(forms.ModelForm):
@@ -64,5 +66,5 @@ class LabelDelete(LoginRequiredMixin, FormMixin, MessageMixin, DeleteView):
             return HttpResponseRedirect(self.get_success_url(),
                                         messages.add_message(
                                             request=self.request,
-                                            message="ОК", level=50))
+                                            message="Метка успешно удалена", level=50))
         return self.form_invalid(self.get_context_data(**kwargs)['form'])
