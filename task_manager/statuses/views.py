@@ -15,6 +15,8 @@ class CreateStatusForm(forms.ModelForm):
         model = Status
         fields = ['name']
 
+    name = forms.CharField(label=_("Имя"))
+
 
 class StatusCreate(LoginRequiredMixin, CreateView):
     model = Status
@@ -33,6 +35,8 @@ class UpdateStatusForm(forms.ModelForm):
     class Meta:
         model = Status
         fields = ['name']
+
+    name = forms.CharField(label=_("Имя"))
 
 
 class StatusUpdate(LoginRequiredMixin, UpdateView):
