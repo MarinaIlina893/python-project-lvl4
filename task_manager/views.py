@@ -2,6 +2,7 @@ from django.shortcuts import render
 from django.utils.translation import gettext as _
 from django.contrib.auth import views as auth_views
 from task_manager.utils import MessageMixin
+from django import forms
 
 
 def index(request):

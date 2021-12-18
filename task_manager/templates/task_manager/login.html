@@ -2,17 +2,8 @@
 {% load i18n %}
 {% load widget_tweaks %}
 {% block content %}
-
-{% if next %}
-    {% if user.is_authenticated %}
-    <p>Your account doesn't have access to this page. To proceed,
-    please login with an account that has access.</p>
-    {% else %}
-    <p>Please login to see this page.</p>
-    {% endif %}
-{% endif %}
 <form method="post">{% csrf_token %}
-    {% for field in form %}
+    {% for field in form.visible_fields %}
     <div class="m-4 form-group">
         <label> {{ field.label }}</label>
         {% render_field field type="text" class="form-control">%}
