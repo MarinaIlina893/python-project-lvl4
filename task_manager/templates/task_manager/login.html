@@ -4,7 +4,7 @@
 {% block content %}
 <form method="post">{% csrf_token %}
     <div class="m-4 form-group">
-        <!---  <label for="id_username">{{ form.username.label }}</label> --->
+        {{ form.username.label_tag }}
         {% render_field form.username type="text" class="form-control" placeholder="Имя пользователя" id="id_username">%}
         {% if form.username.help_text %}
         <small class="form-text text-muted">{{ form.username.help_text }}</small>
