@@ -7,9 +7,10 @@
 <h1>{% trans "Просмотр задачи" %}</h1>
 
 <p>{{ task.name }}<p>
+<p>{{ task.description }}<p>
 <p>{% trans "Автор" %} {{ task.author.first_name|add:" "|add:task.author.last_name}}</p>
 <p>{% trans "Исполнитель" %} {{ task.executor.first_name|add:" "|add:task.executor.last_name}}</p>
-<p>{% trans "Статус" %} {{ task.status.Name}}</p>
+<p>{% trans "Статус" %} {{ task.status.name}}</p>
 <p>{% trans "Дата создания" %} {{ task.created_at}}</p>
     {% if task.labels.all %}
         <p>{% trans "Метки" %}
