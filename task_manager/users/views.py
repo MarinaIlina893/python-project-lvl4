@@ -18,20 +18,20 @@ class CreateUserForm(UserCreationForm):
 
 class UpdateUserForm(forms.ModelForm):
     password1 = forms.CharField(
-        label=_("New password"),
+        label=_("Пароль"),
         widget=forms.PasswordInput(attrs={'autocomplete': 'new-password'}),
         strip=False,
         help_text=password_validation.password_validators_help_text_html(),
     )
     password2 = forms.CharField(
-        label=_("New password confirmation"),
+        label=_("Подтверждение пароля"),
         strip=False,
         widget=forms.PasswordInput(attrs={'autocomplete': 'new-password'}),
     )
 
     class Meta:
         model = User
-        fields = ('first_name', 'last_name', 'username')
+        fields = ('first_name', 'last_name', 'username', 'password1', 'password2')
 
     def clean_password2(self):
         password1 = self.cleaned_data.get('password1')
