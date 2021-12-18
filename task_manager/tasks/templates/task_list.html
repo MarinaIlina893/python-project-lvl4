@@ -4,10 +4,29 @@
 {% block content %}
 <h1>{% trans "Tasks" %}</h1>
 <p><a href="{% url 'task/create' %}"> {% trans "Создать задачу" %} </a></p>
-<form method="get">
-        {{ filter.form.as_p }}
-        <input type="submit" />
-    </form>
+<form action="" method="get">
+  <div class="m-4 form-group">
+    <label for={{ filter.form.executor.id_for_label }}> {{ filter.form.executor.label }}</label>
+    <select name="{{ filter.form.executor.html_name }}" id="{{ filter.form.executor.id_for_label }}" class="form-select" >
+            {% for executor in executors %}
+          <option value="{{ executor.id }}">{{ executor.first_name|add:" "|add:executor.last_name }}</option>
+          {% endfor %}
+   </select></div>
+  <div class="m-4 form-group">
+    <label for={{ filter.form.status.id_for_label }}> {{ filter.form.status.label }}</label>
+    {% render_field filter.form.status type="text" class="form-control">%}
+</div>
+  <div class="m-4 form-group">
+    <label for={{ filter.form.labels.id_for_label }}> {{ filter.form.labels.label }}</label>
+    {% render_field filter.form.labels type="text" class="form-control">%}
+</div>
+   <div class="m-4 form-group">
+    <label for={{ filter.form.author.id_for_label }}> {{ filter.form.author.label }}</label>
+    {% render_field filter.form.author type="checkbox" class="form-check-input">%}
+</div>
+  <button type="submit" class="m-4 btn btn-primary">{% trans "Показать" %}</button>
+</form>
+
 <table class="table table-striped">
   <thead>
     <tr>

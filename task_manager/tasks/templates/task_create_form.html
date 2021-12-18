@@ -27,8 +27,6 @@
     </div>
     <div class="m-4 form-group">
         <label for={{ form.executor.id_for_label }}> {{ form.executor.label }}</label>
-
-
         <select id="{{ form.executor.id_for_label }}" name="{{ form.executor.html_name }}" class="form-control">
             {% for executor in executors %}
           <option value="{{ executor.id }}">{{ executor.first_name|add:" "|add:executor.last_name }}</option>
