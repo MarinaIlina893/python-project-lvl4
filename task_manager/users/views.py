@@ -76,9 +76,10 @@ class UserUpdate(MessageMixin, UpdateView):
     success_message = "Пользователь успешно изменён"
 
 
-class UserDelete(DeleteView):
+class UserDelete(MessageMixin, DeleteView):
     model = User
     success_url = '/users/'
+    success_message = "Пользователь успешно удалён"
 
 
 class UserListView(ListView):
