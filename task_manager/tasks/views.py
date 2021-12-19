@@ -190,7 +190,7 @@ class TaskListView(LoginRequiredMixin, FilterView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['executors'] = User.objects.values('id', 'first_name', 'last_name')
-        context['current_executor'] = int(self.request.GET.get('executor')+'')
+        context['current_executor'] = int(self.request.get.GET('executor'))
 
         return context
 
