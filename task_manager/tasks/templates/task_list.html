@@ -5,12 +5,16 @@
 <h1>{% trans "Tasks" %}</h1>
 <p><a href="{% url 'task/create' %}"> {% trans "Создать задачу" %} </a></p>
 <form action="" method="get">
+  {{ current_executor }}
   <div class="m-4 form-group">
     <label for={{ filter.form.executor.id_for_label }}> {{ filter.form.executor.label }}</label>
-    <select name="{{ filter.form.executor.html_name }}" id="{{ filter.form.executor.id_for_label }}" class="form-select" >
-            {% for executor in executors %}
-          <option value="{{ executor.id }}">{{ executor.first_name|add:" "|add:executor.last_name }}</option>
-          {% endfor %}
+    <select name="executor" id="{{ filter.form.esexecutor.id_for_label }}" class="form-select">
+      {% for e in executors %}
+          <option value="{{ e.id }}"
+            {% if e.id == current_executor %}selected {% endif %} >
+            {{ e.first_name|add:" "|add:e.last_name }}
+          </option>
+       {% endfor %}
    </select></div>
   <div class="m-4 form-group">
     <label for={{ filter.form.status.id_for_label }}> {{ filter.form.status.label }}</label>
@@ -43,7 +47,7 @@
     <tbody>
     {% for task in object_list %}
     <tr>
-      <td>{{ task.name }}</td>
+      <td>{{ task.id }}</td>
       <td><a href="{% url 'task/detail' task.id %}">{{ task.name }}</a></td>
       <td>{{ task.description }}</td>
       <td>{{ task.status.name }}</td>

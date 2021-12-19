@@ -14,6 +14,7 @@ import django_filters
 from django_filters.views import FilterView
 from task_manager.utils import MessageMixin
 from task_manager.users.models import User
+from django.db.models import QuerySet
 
 
 class CreateTaskForm(forms.ModelForm):
@@ -107,15 +108,50 @@ class TaskDetail(LoginRequiredMixin, DetailView):
     context_object_name = 'task'
 
 
+
+
+"""class CustomQuerySet(QuerySet):
+    def annotate_with_custom_field(self):
+        return self.annotate(
+            custom_field=('user__first_name'),
+                default=None,
+            )"""
 class TaskFilter(LoginRequiredMixin, django_filters.FilterSet):
+
+    """class MyModelChoiceFilter(django_filters.ModelChoiceFilter):
+
+        def label_from_instance(self, obj):
+            return "{first_name} {last_name}".format(
+                first_name=obj.first_name, last_name=obj.last_name)"""
+
+    """class MyModelChoiceFilter(django_filters.ModelChoiceFilter):
+        def get_filter_predicate(self, v):
+            return {'first_name': v.annotated_field}
+
+        def filter(self, qs, value):
+            if value:
+                qs = qs.annotate_with_custom_field()
+                qs = super().filter(qs, value)
+            return qs"""
+
+
+
+
+
+    """class User:
+        objects = CustomQuerySet.as_manager()"""
+
+    """def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.filters['executor'].label_from_instance = lambda obj: "%s %s" % (obj.last_name, obj.first_name)"""
 
     status = django_filters.ModelChoiceFilter(field_name='status',
                                               label='Статус',
                                               queryset=Status.objects.all())
 
     executor = django_filters.ModelChoiceFilter(field_name='executor',
-                                                label='Исполнитель',
-                                                queryset=User.objects.all())
+                                   label='Исполнитель',
+                                   queryset=User.objects.all())
 
     labels = django_filters.ModelMultipleChoiceFilter(
         field_name='labels',
@@ -130,7 +166,7 @@ class TaskFilter(LoginRequiredMixin, django_filters.FilterSet):
 
     class Meta:
         model = Task
-        fields = ['status', 'executor', 'labels']
+        fields = ['status', 'executor', 'labels', 'author']
 
     def my_custom_filter(self, queryset, name, value):
         return queryset
@@ -153,6 +189,8 @@ class TaskListView(LoginRequiredMixin, FilterView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['executors'] = User.objects.all()
+        context['executors'] = User.objects.values('id', 'first_name', 'last_name')
+        context['current_executor'] = int(self.request.GET.get('executor'))
+
         return context
 
