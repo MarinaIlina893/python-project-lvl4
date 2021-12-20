@@ -59,11 +59,12 @@ class UpdateTaskForm(forms.ModelForm):
     description = forms.CharField(widget=forms.Textarea, label='Описание')
 
 
-class TaskUpdate(LoginRequiredMixin, UpdateView):
+class TaskUpdate(LoginRequiredMixin, MessageMixin, UpdateView):
     model = Task
     form_class = UpdateTaskForm
     success_url = '/tasks/'
     template_name = 'task_update_form.html'
+    success_message = "Задача успешно изменена"
 
 
 class DeleteTaskForm(forms.ModelForm):
@@ -72,11 +73,11 @@ class DeleteTaskForm(forms.ModelForm):
         fields = ['name']
 
 
-class TaskDelete(LoginRequiredMixin, FormMixin, DeleteView):
+class TaskDelete(LoginRequiredMixin, FormMixin, MessageMixin, DeleteView):
     model = Task
     success_url = '/tasks/'
     template_name = 'task_delete_form.html'
-    success_message = _("You are logged in")
+    success_message = _("Задача успешно удалена")
     error_message = _("Something went wrong")
     form_class = DeleteTaskForm
 
