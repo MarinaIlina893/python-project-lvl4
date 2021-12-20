@@ -1,5 +1,4 @@
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
-from django import forms
 from .models import Task
 from task_manager.statuses.models import Status
 from task_manager.labels.models import Label
@@ -51,7 +50,7 @@ class TaskCreate(LoginRequiredMixin, MessageMixin, CreateView):
 class UpdateTaskForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self.fields['executor'].label_from_instance = lambda obj: obj.first_name+' '+obj.last_name
+        self.fields['executor'].label_from_instance = lambda obj: obj.first_name + ' ' + obj.last_name
 
     class Meta:
         model = Task
@@ -120,7 +119,7 @@ def get_names():
     names = ()
     users = User.objects.all()
     for u in users:
-        names += (u.id, u.first_name+' '+u.last_name),
+        names += (u.id, u.first_name + ' ' + u.last_name),
     return names
 
 
