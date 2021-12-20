@@ -12,7 +12,6 @@ from django.views.generic import DetailView
 import django_filters
 from django_filters.views import FilterView
 from task_manager.utils import MessageMixin
-from task_manager.users.models import User
 from django import forms
 
 
