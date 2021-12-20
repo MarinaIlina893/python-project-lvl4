@@ -15,6 +15,7 @@ from django_filters.views import FilterView
 from task_manager.utils import MessageMixin
 from task_manager.users.models import User
 from django.db.models import QuerySet
+from django import forms
 
 
 class CreateTaskForm(forms.ModelForm):
@@ -116,6 +117,15 @@ class TaskDetail(LoginRequiredMixin, DetailView):
             custom_field=('user__first_name'),
                 default=None,
             )"""
+
+
+def get_names():
+    names = ()
+    users = User.objects.all()
+    for u in users:
+        names += (u.id, u.last_name+' '+u.first_name),
+    return names
+
 class TaskFilter(LoginRequiredMixin, django_filters.FilterSet):
 
     """class MyModelChoiceFilter(django_filters.ModelChoiceFilter):
@@ -149,9 +159,8 @@ class TaskFilter(LoginRequiredMixin, django_filters.FilterSet):
                                               label='Статус',
                                               queryset=Status.objects.all())
 
-    executor = django_filters.ModelChoiceFilter(field_name='executor',
-                                   label='Исполнитель',
-                                   queryset=User.objects.all())
+    executor = django_filters.ChoiceFilter(label='Исполнитель',
+                                           choices=get_names)
 
     labels = django_filters.ModelMultipleChoiceFilter(
         field_name='labels',
@@ -190,7 +199,7 @@ class TaskListView(LoginRequiredMixin, FilterView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['executors'] = User.objects.values('id', 'first_name', 'last_name')
-        context['current_executor'] = int(self.request.get.GET('executor'))
+        context['current_executor'] = self.request.GET.get('executor')
 
         return context
 

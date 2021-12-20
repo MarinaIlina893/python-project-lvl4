@@ -7,14 +7,16 @@
 <form action="" method="get">
   <div class="m-4 form-group">
     <label for={{ filter.form.executor.id_for_label }}> {{ filter.form.executor.label }}</label>
-    <select name="executor" id="{{ filter.form.esexecutor.id_for_label }}" class="form-select">
+    <!--<select name="executor" id="{{ filter.form.executor.id_for_label }}" class="form-select">
       {% for e in executors %}
           <option value="{{ e.id }}"
             {% if e.id == current_executor %}selected {% endif %} >
             {{ e.first_name|add:" "|add:e.last_name }}
           </option>
        {% endfor %}
-   </select></div>
+   </select>-->
+    {% render_field filter.form.executor type="text" class="form-control">%}
+  </div>
   <div class="m-4 form-group">
     <label for={{ filter.form.status.id_for_label }}> {{ filter.form.status.label }}</label>
     {% render_field filter.form.status type="text" class="form-control">%}
