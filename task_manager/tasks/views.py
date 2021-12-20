@@ -96,6 +96,7 @@ class TaskDelete(LoginRequiredMixin, FormMixin, MessageMixin, DeleteView):
     def delete(self, request, *args, **kwargs):
         self.object = self.get_object()
         if self.object.author == request.user:
+            messages.success(self.request, self.success_message)
             self.object.delete()
             return HttpResponseRedirect(self.get_success_url())
         else:
