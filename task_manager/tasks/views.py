@@ -164,7 +164,7 @@ class TaskFilter(LoginRequiredMixin, django_filters.FilterSet):
 
     labels = django_filters.ModelMultipleChoiceFilter(
         field_name='labels',
-        label='Метки',
+        label='Метка',
         queryset=Label.objects.all())
 
     author = django_filters.BooleanFilter(field_name='author',
