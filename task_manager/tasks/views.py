@@ -14,7 +14,6 @@ import django_filters
 from django_filters.views import FilterView
 from task_manager.utils import MessageMixin
 from task_manager.users.models import User
-from django.db.models import QuerySet
 from django import forms
 
 
@@ -29,6 +28,7 @@ class CreateTaskForm(forms.ModelForm):
             'executor': _('Исполнитель'),
             'labels': _('Метки'),
         }
+
 
 class TaskCreate(LoginRequiredMixin, MessageMixin, CreateView):
     model = Task
@@ -52,6 +52,7 @@ class UpdateTaskForm(forms.ModelForm):
     class Meta:
         model = Task
         fields = ['name', 'description', 'status', 'executor', 'labels']
+    description = forms.CharField(widget=forms.Textarea)
 
 
 class TaskUpdate(LoginRequiredMixin, UpdateView):
@@ -109,16 +110,6 @@ class TaskDetail(LoginRequiredMixin, DetailView):
     context_object_name = 'task'
 
 
-
-
-"""class CustomQuerySet(QuerySet):
-    def annotate_with_custom_field(self):
-        return self.annotate(
-            custom_field=('user__first_name'),
-                default=None,
-            )"""
-
-
 def get_names():
     names = ()
     users = User.objects.all()
@@ -126,34 +117,8 @@ def get_names():
         names += (u.id, u.first_name+' '+u.last_name),
     return names
 
+
 class TaskFilter(LoginRequiredMixin, django_filters.FilterSet):
-
-    """class MyModelChoiceFilter(django_filters.ModelChoiceFilter):
-
-        def label_from_instance(self, obj):
-            return "{first_name} {last_name}".format(
-                first_name=obj.first_name, last_name=obj.last_name)"""
-
-    """class MyModelChoiceFilter(django_filters.ModelChoiceFilter):
-        def get_filter_predicate(self, v):
-            return {'first_name': v.annotated_field}
-
-        def filter(self, qs, value):
-            if value:
-                qs = qs.annotate_with_custom_field()
-                qs = super().filter(qs, value)
-            return qs"""
-
-
-
-
-
-    """class User:
-        objects = CustomQuerySet.as_manager()"""
-
-    """def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        self.filters['executor'].label_from_instance = lambda obj: "%s %s" % (obj.last_name, obj.first_name)"""
 
     status = django_filters.ModelChoiceFilter(field_name='status',
                                               label='Статус',
@@ -171,7 +136,6 @@ class TaskFilter(LoginRequiredMixin, django_filters.FilterSet):
                                           label='Только свои задачи',
                                           widget=forms.CheckboxInput,
                                           method='my_custom_filter')
-
 
     class Meta:
         model = Task
