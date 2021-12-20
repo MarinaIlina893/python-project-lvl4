@@ -56,7 +56,7 @@ class UpdateTaskForm(forms.ModelForm):
     class Meta:
         model = Task
         fields = ['name', 'description', 'status', 'executor', 'labels']
-    description = forms.CharField(widget=forms.Textarea)
+    description = forms.CharField(widget=forms.Textarea, label='Описание')
 
 
 class TaskUpdate(LoginRequiredMixin, UpdateView):
