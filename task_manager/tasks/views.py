@@ -123,7 +123,7 @@ def get_names():
     names = ()
     users = User.objects.all()
     for u in users:
-        names += (u.id, u.last_name+' '+u.first_name),
+        names += (u.id, u.first_name+' '+u.last_name),
     return names
 
 class TaskFilter(LoginRequiredMixin, django_filters.FilterSet):
