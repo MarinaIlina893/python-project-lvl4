@@ -49,6 +49,10 @@ class TaskCreate(LoginRequiredMixin, MessageMixin, CreateView):
 
 
 class UpdateTaskForm(forms.ModelForm):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['executor'].label_from_instance = lambda obj: obj.first_name+' '+obj.last_name
+
     class Meta:
         model = Task
         fields = ['name', 'description', 'status', 'executor', 'labels']
@@ -164,6 +168,4 @@ class TaskListView(LoginRequiredMixin, FilterView):
         context = super().get_context_data(**kwargs)
         context['executors'] = User.objects.values('id', 'first_name', 'last_name')
         context['current_executor'] = self.request.GET.get('executor')
-
         return context
-
