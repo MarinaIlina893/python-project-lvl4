@@ -13,6 +13,7 @@ import django_filters
 from django_filters.views import FilterView
 from task_manager.utils import MessageMixin
 from django import forms
+from django.contrib.auth.models import User
 
 
 class CreateTaskForm(forms.ModelForm):
