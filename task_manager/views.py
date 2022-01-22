@@ -8,7 +8,7 @@ from django.contrib import messages
 
 
 def index(request):
-    return render(request, 'task_manager/base.html')
+    return render(request, 'task_manager/index.html')
 
 
 class LoginForm(AuthenticationForm):

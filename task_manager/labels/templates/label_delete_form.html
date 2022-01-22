@@ -2,10 +2,10 @@
 {% load i18n %}
 {% load widget_tweaks %}
 {% block content %}
-<h1>{% trans "Удаление метки" %}</h1>
+<h1 class="my-4">{% trans "Удаление метки" %}</h1>
 <form method="post">{% csrf_token %}
-<h2>{% trans "Вы уверены, что хотите удалить" %}{{ " "|add:label.name }}?</h2>
-    <button type="submit" class="m-4 btn btn-primary">{% trans "Да, удалить" %}</button>
+<p>{% trans "Вы уверены, что хотите удалить" %}{{ " "|add:label.name }}?</p>
+    <input class="btn btn-danger" type="submit" value="{% trans 'Да, удалить' %}">
 
 </form>
 {% endblock %}

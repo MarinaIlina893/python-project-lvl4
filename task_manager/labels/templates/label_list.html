@@ -2,15 +2,15 @@
 {% load i18n %}
 {% load widget_tweaks %}
 {% block content %}
-<h1>{% trans "Метки" %}</h1>
+<h1 class="my-4">{% trans "Метки" %}</h1>
 <p><a href="{% url 'label/create' %}">{% trans "Создать метку" %} </a></p>
-<table class="table table-striped">
+<table class="table table-hover">
   <thead>
     <tr>
       <th scope="col">{% trans "ID" %}</th>
       <th scope="col">{% trans "Имя" %}</th>
       <th scope="col">{% trans "Дата создания" %}</th>
-      <th scope="col"></th>
+      <th scope="col">{% trans "Действия" %}</th>
     </tr>
   </thead>
     <tbody>
@@ -19,8 +19,8 @@
       <td>{{ label.id }}</td>
       <td>{{ label.name }}</td>
       <td>{{ label.created_at }}</td>
-      <td><a href="{% url 'label/update' label.id %}">{% trans "Изменить" %}</a></td>
-      <td><a href="{% url 'label/delete' label.id %}">{% trans "Удалить" %}</a></td>
+      <td><a href="{% url 'label/update' label.id %}"><i class="bi bi-pencil"></i></a></td>
+      <td><a href="{% url 'label/delete' label.id %}"><i class="bi bi-trash"></i></a></td>
     </tr>
 {% endfor %}
     </tbody>

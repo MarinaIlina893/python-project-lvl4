@@ -2,37 +2,29 @@
 {% load i18n %}
 {% load widget_tweaks %}
 {% block content %}
-<h1>{% trans "Tasks" %}</h1>
+<h1 class="my-4">{% trans "Задачи" %}</h1>
 <p><a href="{% url 'task/create' %}"> {% trans "Создать задачу" %} </a></p>
 <form action="" method="get">
-  <div class="m-4 form-group">
+  <div class="my-4 form-group">
     <label for={{ filter.form.executor.id_for_label }}> {{ filter.form.executor.label }}</label>
-    <!--<select name="executor" id="{{ filter.form.executor.id_for_label }}" class="form-select">
-      {% for e in executors %}
-          <option value="{{ e.id }}"
-            {% if e.id == current_executor %}selected {% endif %} >
-            {{ e.first_name|add:" "|add:e.last_name }}
-          </option>
-       {% endfor %}
-   </select>-->
     {% render_field filter.form.executor type="text" class="form-control">%}
   </div>
-  <div class="m-4 form-group">
+  <div class="my-4 form-group">
     <label for={{ filter.form.status.id_for_label }}> {{ filter.form.status.label }}</label>
     {% render_field filter.form.status type="text" class="form-control">%}
 </div>
-  <div class="m-4 form-group">
+  <div class="my-4 form-group">
     <label for={{ filter.form.labels.id_for_label }}> {{ filter.form.labels.label }}</label>
     {% render_field filter.form.labels type="text" class="form-control">%}
 </div>
-   <div class="m-4 form-group">
+   <div class="my-4 form-group">
     <label for={{ filter.form.author.id_for_label }}> {{ filter.form.author.label }}</label>
     {% render_field filter.form.author type="checkbox" class="form-check-input">%}
 </div>
-  <button type="submit" class="m-4 btn btn-primary">{% trans "Показать" %}</button>
+  <button type="submit" class="my-4 btn btn-primary">{% trans "Показать" %}</button>
 </form>
 
-<table class="table table-striped">
+<table class="table table-hover">
   <thead>
     <tr>
       <th scope="col">ID</th>
@@ -42,7 +34,7 @@
       <th scope="col">Автор</th>
       <th scope="col">Исполнитель</th>
       <th scope="col">Дата создания</th>
-      <th scope="col"></th>
+      <th scope="col">Действия</th>
     </tr>
   </thead>
     <tbody>
@@ -55,7 +47,9 @@
       <td>{{ task.author.first_name|add:" "|add:task.author.last_name}}</td>
       <td>{{ task.executor.first_name|add:" "|add:task.executor.last_name}}</td>
       <td>{{ task.created_at }}</td>
-      <td><a href="{% url 'task/update' task.id %}">Изменить</a><a href="{% url 'task/delete' task.id %}">Удалить</a></td>
+      <td><a href="{% url 'task/update' task.id %}"><i class="bi bi-pencil"></i></a>
+        <td>
+        <a href="{% url 'task/delete' task.id %}"><i class="bi bi-trash"></a></td>
     </tr>
 {% endfor %}
     </tbody>

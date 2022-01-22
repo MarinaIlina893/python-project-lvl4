@@ -73,12 +73,12 @@ class DeleteTaskForm(forms.ModelForm):
         fields = ['name']
 
 
-class TaskDelete(LoginRequiredMixin, FormMixin, MessageMixin, DeleteView):
+class TaskDelete(LoginRequiredMixin, MessageMixin, DeleteView):
     model = Task
     success_url = '/tasks/'
     template_name = 'task_delete_form.html'
     success_message = _("Задача успешно удалена")
-    error_message = _("Something went wrong")
+    error_message = _("Нельзя удалить задачу другого пользователя")
     form_class = DeleteTaskForm
 
     def get(self, request, *args, **kwargs):
@@ -88,19 +88,11 @@ class TaskDelete(LoginRequiredMixin, FormMixin, MessageMixin, DeleteView):
             return HttpResponseRedirect(reverse('tasks'))
         return super().get(self, request, args, *kwargs)
 
-    def form_invalid(self, form):
-        response = super().form_invalid(form)
-        messages.error(self.request, self.error_message)
-        return response
-
     def delete(self, request, *args, **kwargs):
         self.object = self.get_object()
-        if self.object.author == request.user:
-            messages.success(self.request, self.success_message)
-            self.object.delete()
-            return HttpResponseRedirect(self.get_success_url())
-        else:
-            return self.form_invalid(self.get_context_data(**kwargs)['form'])
+        messages.success(self.request, self.success_message)
+        self.object.delete()
+        return HttpResponseRedirect(self.get_success_url())
 
 
 class TaskDetailForm(forms.ModelForm):

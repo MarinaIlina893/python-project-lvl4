@@ -2,30 +2,30 @@
 {% load i18n %}
 {% load widget_tweaks %}
 {% block content %}
-<h1>{% trans "Создать задачу" %}</h1>
+<h1 class="my-4">{% trans "Создать задачу" %}</h1>
 <form method="post">{% csrf_token %}
-    <div class="m-4 form-group">
+    <div class="mн-4 form-group">
         <label for={{ form.name.id_for_label }}> {{ form.name.label }}</label>
         {% render_field form.name type="text" class="form-control">%}
         {% if form.name.help_text %}
         <small class="form-text text-muted">{{ form.name.help_text }}</small>
       {% endif %}
     </div>
-    <div class="m-4 form-group">
+    <div class="my-4 form-group">
         <label for={{ form.description.id_for_label }}> {{ form.description.label }}</label>
         {% render_field form.description type="text" class="form-control">%}
         {% if form.description.help_text %}
         <small class="form-text text-muted">{{ form.description.help_text }}</small>
       {% endif %}
     </div>
-    <div class="m-4 form-group">
+    <div class="my-4 form-group">
         <label for={{ form.status.id_for_label }}> {{ form.status.label }}</label>
         {% render_field form.status type="text" class="form-control">%}
         {% if form.status.help_text %}
         <small class="form-text text-muted">{{ form.status.help_text }}</small>
       {% endif %}
     </div>
-    <div class="m-4 form-group">
+    <div class="my-4 form-group">
         <label for={{ form.executor.id_for_label }}> {{ form.executor.label }}</label>
         <select id="{{ form.executor.id_for_label }}" name="{{ form.executor.html_name }}" class="form-control">
             {% for executor in executors %}
@@ -36,13 +36,13 @@
         <small class="form-text text-muted">{{ form.status.help_text }}</small>
       {% endif %}
     </div>
-    <div class="m-4 form-group">
+    <div class="my-4 form-group">
         <label for={{ form.labels.id_for_label }}> {{ form.labels.label }}</label>
         {% render_field form.labels type="select" class="form-control">%}
         {% if form.labels.help_text %}
         <small class="form-text text-muted">{{ form.labels.help_text }}</small>
       {% endif %}
     </div>
-    <button type="submit" class="m-4 btn btn-primary">{% trans "Создать" %}</button>
+    <button type="submit" class="my-4 btn btn-primary">{% trans "Создать" %}</button>
 </form>
 {% endblock %}

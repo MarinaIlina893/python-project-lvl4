@@ -2,26 +2,29 @@
 {% load i18n %}
 {% load widget_tweaks %}
 {% block content %}
-<h1>{% trans "Statuses" %}</h1>
-<p><a href="{% url 'status/create' %}"> {% trans "Создать статус" %} </a></p>
-<table class="table table-striped">
-  <thead>
-    <tr>
-      <th scope="col">ID</th>
-      <th scope="col">Имя</th>
-      <th scope="col">Дата создания</th>
-      <th scope="col"></th>
-    </tr>
-  </thead>
-    <tbody>
-    {% for status in object_list %}
-    <tr>
-      <td>{{ status.id }}</td>
-      <td>{{ status.name }}</td>
-      <td>{{ status.created_at }}</td>
-      <td><a href="{% url 'status/update' status.id %}">Изменить</a><a href="{% url 'status/delete' status.id %}">Удалить</a></td>
-    </tr>
-{% endfor %}
-    </tbody>
-</table>
+<div class="container wrapper flex-grow-1">
+  <h1 class="my-4">{% trans "Статусы" %}</h1>
+  <p><a href="{% url 'status/create' %}"> {% trans "Создать статус" %} </a></p>
+  <table class="table table-hover">
+    <thead>
+      <tr>
+        <th scope="col">ID</th>
+        <th scope="col">Имя</th>
+        <th scope="col">Дата создания</th>
+        <th scope="col">Действия</th>
+      </tr>
+    </thead>
+      <tbody>
+      {% for status in object_list %}
+      <tr>
+        <td>{{ status.id }}</td>
+        <td>{{ status.name }}</td>
+        <td>{{ status.created_at }}</td>
+        <td><a href="{% url 'status/update' status.id %}"><i class="bi bi-pencil"></i></a></td>
+        <td><a href="{% url 'status/delete' status.id %}"><i class="bi bi-trash"></i></a></td>
+      </tr>
+  {% endfor %}
+      </tbody>
+  </table>
+</div>
 {% endblock %}

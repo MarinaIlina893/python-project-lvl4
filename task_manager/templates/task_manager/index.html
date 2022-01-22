@@ -1,0 +1,21 @@
+{% extends 'task_manager/base.html' %}
+{% load i18n %}
+{% load widget_tweaks %}
+{% block content %}
+  <h1 class="my-4">
+      </h1>
+<h1 class="my-4"></h1>
+  <div class="card">
+    <div class="card-body p-5 bg-light">
+      <div class="display-4 mb-4">Привет, это менеджер задач</div>
+      <p class="lead mb-4">Он поможет содержать дела в порядке</p>
+      <hr>
+      {% if not user.is_authenticated %}
+      <a class="btn btn-primary btn-lg" href="{% url 'users/create/' %}">Начать</a>
+      {% endif %}
+      {% if user.is_authenticated %}
+      <a class="btn btn-primary btn-lg" href="{% url 'task/create' %}">Создать задачу</a>
+      {% endif %}
+    </div>
+  </div>
+{% endblock %}

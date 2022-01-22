@@ -60,7 +60,7 @@ class StatusDelete(LoginRequiredMixin, FormMixin, DeleteView):
     form_class = DeleteStatusForm
     success_url = '/statuses/'
     template_name = 'status_delete_form.html'
-    error_message = _("Something went wrong")
+    error_message = _("Нельзя удалить статус. Он используется в задачах")
     success_message = "Статус успешно удалён"
 
     def form_invalid(self, form):

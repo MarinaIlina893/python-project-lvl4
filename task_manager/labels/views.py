@@ -67,4 +67,5 @@ class LabelDelete(LoginRequiredMixin, FormMixin, MessageMixin, DeleteView):
                                         messages.add_message(
                                             request=self.request,
                                             message="Метка успешно удалена", level=50))
-        return self.form_invalid(self.get_context_data(**kwargs)['form'])
+        else:
+            return self.form_invalid(self.get_context_data(**kwargs)['form'])

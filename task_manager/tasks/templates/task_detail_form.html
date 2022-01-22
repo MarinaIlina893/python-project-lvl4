@@ -4,20 +4,62 @@
 {% block content %}
 
 {% csrf_token %}
-<h1>{% trans "Просмотр задачи" %}</h1>
-<p>{{ task.name }}<p>
-<p>{{ task.description }}<p>
-<p>{% trans "Автор" %} {{ task.author.first_name|add:" "|add:task.author.last_name}}</p>
-<p>{% trans "Исполнитель" %} {{ task.executor.first_name|add:" "|add:task.executor.last_name}}</p>
-<p>{% trans "Статус" %} {{ task.status.name}}</p>
-<p>{% trans "Дата создания" %} {{ task.created_at}}</p>
-    {% if task.labels.all %}
-        <p>{% trans "Метки" %}
-            {% for label in task.labels.all %}
-                {{ label.name }}
-            {% endfor %}</p>
-    {% endif %}
-<p><a href="{% url 'task/update' task.id %}">Изменить</a></p>
-<p><a href="{% url 'task/delete' task.id %}">Удалить</a></p>
 
+<h1 class="my-4">{% trans "Просмотр задачи" %}</h1>
+<div class="card">
+     <div class="card-header bg-secondary text-white">
+         <h2>{{ task.name }}</h2>
+     </div>
+         <div class="card-body bg-light">
+             <p>{{ task.description }}<p>
+             <hr>
+             <div class="row p-1">
+                 <div class="col">
+                     <p>{% trans "Автор" %}</p>
+                 </div>
+                 <div class="col">
+                     <p>{{ task.author.first_name|add:" "|add:task.author.last_name}}</p>
+                </div>
+             </div>
+             <div class="row p-1">
+                 <div class="col">
+                     <p>{% trans "Исполнитель" %}</p>
+                 </div>
+                 <div class="col">
+                     <p>{{ task.executor.first_name|add:" "|add:task.executor.last_name}}</p>
+                 </div>
+             </div>
+             <div class="row p-1">
+                 <div class="col">
+                     <p>{% trans "Статус" %}</p>
+                 </div>
+                 <div class="col"
+                     <p>{{ task.status.name}}</p>
+                </div>
+             </div>
+            <div class="row p-1">
+                <div class="col">
+                    <p>{% trans "Дата создания" %}</p>
+                </div>
+                <div class="col">
+                    <p>{{ task.created_at}}</p>
+                </div>
+            </div>
+            {% if task.labels.all %}
+              <div class="row p-1">
+                <div class="col">
+                    <h6>{% trans "Метки" %}</h6>
+
+                  <ul>
+                    {% for label in task.labels.all %}
+                      <li>{{ label.name }}</li>
+                    {% endfor %}</p>
+                  </ul>
+                    </div>
+            {% endif %}
+        <p><a href="{% url 'task/update' task.id %}">Изменить</a></p>
+        <p><a href="{% url 'task/delete' task.id %}">Удалить</a></p>
+         </div>
+     </div>
+</div>
 {% endblock %}

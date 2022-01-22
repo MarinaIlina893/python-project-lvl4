@@ -1,21 +1,18 @@
-asgiref==3.4.1; python_version >= "3.6" \
-    --hash=sha256:ffc141aa908e6f175673e7b1b3b7af4fdb0ecb738fc5c8b88f69f055c2415214 \
-    --hash=sha256:4ef1ab46b484e3c706329cedeff284a5d40824200638503f5768edb6de7d58e9
-dj-database-url==0.5.0 \
-    --hash=sha256:4aeaeb1f573c74835b0686a2b46b85990571159ffc21aa57ecd4d1e1cb334163 \
-    --hash=sha256:851785365761ebe4994a921b433062309eb882fedd318e1b0fcecc607ed02da9
-django==3.2.9; python_version >= "3.6" \
-    --hash=sha256:e22c9266da3eec7827737cde57694d7db801fedac938d252bf27377cec06ed1b \
-    --hash=sha256:51284300f1522ffcdb07ccbdf676a307c6678659e1284f0618e5a774127a6a08
-gunicorn==20.1.0; python_version >= "3.5" \
-    --hash=sha256:9dcc4547dbb1cb284accfb15ab5667a0e5d1881cc443e0677b4882a4067a807e \
-    --hash=sha256:e0a968b5ba15f8a328fdfd7ab1fcb5af4470c28aaf7e55df02a99bc13138e6e8
-python-dotenv==0.19.2; python_version >= "3.5" \
-    --hash=sha256:a5de49a31e953b45ff2d2fd434bbc2670e8db5273606c1e737cc6b93eff3655f \
-    --hash=sha256:32b2bdc1873fd3a3c346da1c6db83d0053c3c62f28f1f38516070c4c8971b1d3
-pytz==2021.3; python_version >= "3.6" \
-    --hash=sha256:3672058bc3453457b622aab7a1c3bfd5ab0bdae451512f6cf25f64ed37f5b87c \
-    --hash=sha256:acad2d8b20a1af07d4e4c9d2e9285c5ed9104354062f275f3fcd88dcef4f1326
-sqlparse==0.4.2; python_version >= "3.6" \
-    --hash=sha256:48719e356bb8b42991bdbb1e8b83223757b93789c00910a616a071910ca4a64d \
-    --hash=sha256:0c00730c74263a94e5a9919ade150dfc3b19c574389985446148402998287dae
+asgiref @ file:///Users/useradmin/Library/Caches/pypoetry/artifacts/c3/92/1c/3d42ce7ad1e9e2aa1621c3fa8ebc5e21bd880a768bd691fb4f0356baa8/asgiref-3.4.1-py3-none-any.whl
+beautifulsoup4 @ file:///Users/useradmin/Library/Caches/pypoetry/artifacts/d4/3e/b2/b4df19cca3023c21eb4a289b88c132ac71a9517bddef2055fd38eadd39/beautifulsoup4-4.10.0-py3-none-any.whl
+dj-database-url @ file:///Users/useradmin/Library/Caches/pypoetry/artifacts/45/63/a9/658183194fc3125fc68440060966adc5dd0a3fc4ce8fed4192341b49bf/dj_database_url-0.5.0-py2.py3-none-any.whl
+Django @ file:///Users/useradmin/Library/Caches/pypoetry/artifacts/68/88/e8/04dd0b7619c91adf7efe1467541f7aced060d2cf19bf26d4bb32bc54fa/Django-3.2.9-py3-none-any.whl
+django-bootstrap4 @ file:///Users/useradmin/Library/Caches/pypoetry/artifacts/80/ac/31/84cb2405545c3bae27c142e53058bd5916c37565cef15bd38572a45bc5/django_bootstrap4-21.1-py3-none-any.whl
+django-crispy-forms @ file:///Users/useradmin/Library/Caches/pypoetry/artifacts/a1/8a/c7/6256c95c77825d805222e5381a8e469719eb4ac1fb81a1883128cc6697/django_crispy_forms-1.13.0-py3-none-any.whl
+django-filter @ file:///Users/useradmin/Library/Caches/pypoetry/artifacts/a9/c6/98/7cc5361bf7dd56b5125c00f61aaf4c4a2c94e438288814f48d6cc4fe3b/django_filter-21.1-py3-none-any.whl
+django-widget-tweaks @ file:///Users/useradmin/Library/Caches/pypoetry/artifacts/a3/51/85/e046041fb4fa81b224034f1e832a2b709b2f88fb5191b5e2cd0076f260/django_widget_tweaks-1.4.9-py2.py3-none-any.whl
+flake8 @ file:///Users/useradmin/Library/Caches/pypoetry/artifacts/99/5c/01/a49c075bc6dead5c60588c1cd1701f63d614740792c9a09fb133b41d58/flake8-4.0.1-py2.py3-none-any.whl
+gunicorn @ file:///Users/useradmin/Library/Caches/pypoetry/artifacts/d4/22/ea/fb991f1fdb4e8ae8fd30e0bce3c23ece991aa75df3f5a4c4f4d5aba6ae/gunicorn-20.1.0-py3-none-any.whl
+mccabe @ file:///Users/useradmin/Library/Caches/pypoetry/artifacts/96/5e/5f/21ae5296697ca7f94de4da6e21d4936d74029c352a35202e4c339a4253/mccabe-0.6.1-py2.py3-none-any.whl
+pycodestyle @ file:///Users/useradmin/Library/Caches/pypoetry/artifacts/80/25/e5/ced4effd2487693e96521aebb353ce58ad0d81417f71c480419ea8f44a/pycodestyle-2.8.0-py2.py3-none-any.whl
+pyflakes @ file:///Users/useradmin/Library/Caches/pypoetry/artifacts/ad/8e/6d/e46117c96aa3e955c40ed2f0d35b29910b0e557e327fbbba17fd8c390c/pyflakes-2.4.0-py2.py3-none-any.whl
+python-dotenv @ file:///Users/useradmin/Library/Caches/pypoetry/artifacts/5b/d0/1b/25c6bbc2c828652b337720dc85e45350ab608aae80057b49ce5c6a0c7b/python_dotenv-0.19.2-py2.py3-none-any.whl
+python-version @ file:///Users/useradmin/Library/Caches/pypoetry/artifacts/82/01/3b/497241303291e06c08c400d315d1d57749a056a3c2d802646d01c4df0a/python_version-0.0.2-py2.py3-none-any.whl
+pytz @ file:///Users/useradmin/Library/Caches/pypoetry/artifacts/3e/f3/dd/6629bf5ed0a970a128e0a015f2af3b67280e749a56fdaabdaa06d5fc6b/pytz-2021.3-py2.py3-none-any.whl
+soupsieve @ file:///Users/useradmin/Library/Caches/pypoetry/artifacts/d6/e3/46/df82bc73fb10e31f7b04a84f47a5779830a07eeb6a6fa547e6d39ba88f/soupsieve-2.3.1-py3-none-any.whl
+sqlparse @ file:///Users/useradmin/Library/Caches/pypoetry/artifacts/ea/fd/ba/117a876397913faee210ef8bac93829e22ad9232662e656971383c0718/sqlparse-0.4.2-py3-none-any.whl

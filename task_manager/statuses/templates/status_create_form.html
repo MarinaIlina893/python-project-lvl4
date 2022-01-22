@@ -2,10 +2,10 @@
 {% load i18n %}
 {% load widget_tweaks %}
 {% block content %}
-<h1>{% trans "Создать статус" %}</h1>
+<h1 class="my-4">{% trans "Создать статус" %}</h1>
 <form method="post">{% csrf_token %}
     {% for field in form %}
-    <div class="m-4 form-group">
+    <div class="my-4 form-group">
         <label for={{ field.id_for_label }}> {{ field.label }}</label>
         {% render_field field type="text" class="form-control">%}
         {% if field.help_text %}
@@ -13,6 +13,6 @@
       {% endif %}
     </div>
     {% endfor %}
-    <button type="submit" class="m-4 btn btn-primary">{% trans "Создать" %}</button>
+    <button type="submit" class="my-4 btn btn-primary">{% trans "Создать" %}</button>
 </form>
 {% endblock %}

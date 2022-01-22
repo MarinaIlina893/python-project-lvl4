@@ -8,6 +8,11 @@ from django.utils.translation import gettext_lazy as _
 from django.contrib.auth import password_validation
 from task_manager.utils import MessageMixin
 from django.contrib import messages
+from django.http import HttpResponseRedirect
+from task_manager.utils import MessageMixin
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.views.generic.edit import FormMixin
+from django.urls import reverse
 
 
 class CreateUserForm(UserCreationForm):
@@ -75,16 +80,30 @@ class UserUpdate(MessageMixin, UpdateView):
     template_name = 'auth/user_update.html'
     form_class = UpdateUserForm
     success_message = "Пользователь успешно изменён"
+    error_message = _("Нельзя изменить другого пользователя")
+
+    def get(self, request, *args, **kwargs):
+        self.object = self.get_object()
+        if not self.object == request.user:
+            messages.error(self.request, self.error_message)
+            return HttpResponseRedirect(reverse('users'))
+        return super().get(self, request, args, *kwargs)
 
 
-class UserDelete(DeleteView):
+class UserDelete(LoginRequiredMixin, MessageMixin, DeleteView):
     model = User
     success_url = '/users/'
     success_message = "Пользователь успешно удалён"
+    error_message = _("Нельзя удалить другого пользователя")
+    form_class = UserDeleteForm
+    template_name = 'auth/user_confirm_delete.html'
 
-    def delete(self, request, *args, **kwargs):
-        messages.success(self.request, self.success_message)
-        return super().delete(request, *args, **kwargs)
+    def get(self, request, *args, **kwargs):
+        self.object = self.get_object()
+        if not self.object.author == request.user:
+            messages.error(self.request, self.error_message)
+            return HttpResponseRedirect(reverse('users'))
+        return super().get(self, request, args, *kwargs)
 
 
 class UserListView(ListView):
