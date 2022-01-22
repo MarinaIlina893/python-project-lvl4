@@ -14,6 +14,7 @@ from pathlib import Path
 import os
 from dotenv import load_dotenv
 from django.utils.translation import gettext_lazy as _
+import django_heroku
 
 
 load_dotenv()  # take environment variables from .env.
@@ -150,3 +151,5 @@ LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = '/'
 
 # AUTH_USER_MODEL = 'django.contrib.auth.models.User'
+
+django_heroku.settings(locals())

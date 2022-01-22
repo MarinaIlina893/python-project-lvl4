@@ -23,6 +23,7 @@ django-crispy-forms = "^1.13.0"
 django-widget-tweaks = "^1.4.9"
 django-filter = "^21.1"
 flake8 = "^3.8.4"
+django-heroku = "^0.3.1"
 
 [tool.poetry.dev-dependencies]
 gunicorn = "^20.1.0"
