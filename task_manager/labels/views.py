@@ -25,7 +25,7 @@ class LabelCreate(LoginRequiredMixin, MessageMixin, CreateView):
     success_message = "Метка успешно создана"
 
 
-class LabelListView(LoginRequiredMixin, ListView):
+class LabelListView(ListView):
     model = Label
     paginate_by = 30
     template_name = 'label_list.html'

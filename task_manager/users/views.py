@@ -6,12 +6,10 @@ from django.contrib.auth.forms import UserCreationForm
 from django.core.exceptions import ValidationError
 from django.utils.translation import gettext_lazy as _
 from django.contrib.auth import password_validation
-from task_manager.utils import MessageMixin
 from django.contrib import messages
 from django.http import HttpResponseRedirect
 from task_manager.utils import MessageMixin
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.views.generic.edit import FormMixin
 from django.urls import reverse
 
 

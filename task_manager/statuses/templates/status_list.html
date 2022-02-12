@@ -4,14 +4,15 @@
 {% block content %}
 <div class="container wrapper flex-grow-1">
   <h1 class="my-4">{% trans "Статусы" %}</h1>
+  {% if user.is_authenticated %}
   <p><a href="{% url 'status/create' %}"> {% trans "Создать статус" %} </a></p>
+  {% endif %}
   <table class="table table-hover">
     <thead>
       <tr>
         <th scope="col">ID</th>
         <th scope="col">Имя</th>
         <th scope="col">Дата создания</th>
-        <th scope="col">Действия</th>
       </tr>
     </thead>
       <tbody>
@@ -20,8 +21,10 @@
         <td>{{ status.id }}</td>
         <td>{{ status.name }}</td>
         <td>{{ status.created_at }}</td>
+         {% if user.is_authenticated %}
         <td><a href="{% url 'status/update' status.id %}"><i class="bi bi-pencil"></i></a></td>
         <td><a href="{% url 'status/delete' status.id %}"><i class="bi bi-trash"></i></a></td>
+        {% endif %}
       </tr>
   {% endfor %}
       </tbody>

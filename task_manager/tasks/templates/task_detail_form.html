@@ -57,8 +57,10 @@
                   </ul>
                     </div>
             {% endif %}
+                   {% if user.is_authenticated %}
         <p><a href="{% url 'task/update' task.id %}">Изменить</a></p>
         <p><a href="{% url 'task/delete' task.id %}">Удалить</a></p>
+                  {% endif %}
          </div>
      </div>
 </div>

@@ -101,7 +101,7 @@ class TaskDetailForm(forms.ModelForm):
         fields = ['name']
 
 
-class TaskDetail(LoginRequiredMixin, DetailView):
+class TaskDetail(DetailView):
     model = Task
     template_name = 'task_detail_form.html'
     form_class = TaskDetailForm
@@ -116,7 +116,7 @@ def get_names():
     return names
 
 
-class TaskFilter(LoginRequiredMixin, django_filters.FilterSet):
+class TaskFilter(django_filters.FilterSet):
 
     status = django_filters.ModelChoiceFilter(field_name='status',
                                               label='Статус',
@@ -143,7 +143,7 @@ class TaskFilter(LoginRequiredMixin, django_filters.FilterSet):
         return queryset
 
 
-class TaskListView(LoginRequiredMixin, FilterView):
+class TaskListView(FilterView):
     model = Task
     paginate_by = 30
     template_name = 'task_list.html'

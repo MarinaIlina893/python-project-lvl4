@@ -3,7 +3,9 @@
 {% load widget_tweaks %}
 {% block content %}
 <h1 class="my-4">{% trans "Задачи" %}</h1>
+ {% if user.is_authenticated %}
 <p><a href="{% url 'task/create' %}"> {% trans "Создать задачу" %} </a></p>
+{% endif %}
 <form action="" method="get">
   <div class="my-4 form-group">
     <label for={{ filter.form.executor.id_for_label }}> {{ filter.form.executor.label }}</label>
@@ -17,10 +19,12 @@
     <label for={{ filter.form.labels.id_for_label }}> {{ filter.form.labels.label }}</label>
     {% render_field filter.form.labels type="text" class="form-control">%}
 </div>
-   <div class="my-4 form-group">
+  {% if user.is_authenticated %}
+  <div class="my-4 form-group">
     <label for={{ filter.form.author.id_for_label }}> {{ filter.form.author.label }}</label>
     {% render_field filter.form.author type="checkbox" class="form-check-input">%}
-</div>
+  </div>
+  {% endif %}
   <button type="submit" class="my-4 btn btn-primary">{% trans "Показать" %}</button>
 </form>
 
@@ -34,7 +38,7 @@
       <th scope="col">Автор</th>
       <th scope="col">Исполнитель</th>
       <th scope="col">Дата создания</th>
-      <th scope="col">Действия</th>
+
     </tr>
   </thead>
     <tbody>
@@ -47,9 +51,11 @@
       <td>{{ task.author.first_name|add:" "|add:task.author.last_name}}</td>
       <td>{{ task.executor.first_name|add:" "|add:task.executor.last_name}}</td>
       <td>{{ task.created_at }}</td>
+      {% if user.is_authenticated %}
       <td><a href="{% url 'task/update' task.id %}"><i class="bi bi-pencil"></i></a>
         <td>
-        <a href="{% url 'task/delete' task.id %}"><i class="bi bi-trash"></a></td>
+        <a href="{% url 'task/delete' task.id %}"><i class="bi bi-trash"></i></a></td>
+      {% endif %}
     </tr>
 {% endfor %}
     </tbody>
